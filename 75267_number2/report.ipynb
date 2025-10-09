@@ -1,0 +1,57 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "0ee45a07",
+   "metadata": {},
+   "source": [
+    "# Computer Vision 2025-2026 - NOVA FCT\n",
+    "\n",
+    "### Assignment 1\n",
+    "\n",
+    "**Authors**:\n",
+    "   - Student number email\n",
+    "   - Student number email\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9e9bf0aa",
+   "metadata": {},
+   "source": [
+    "Some text"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "f10b2ed5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Some Code"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "cv_labs",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.23"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
