@@ -12,10 +12,11 @@ import numpy as np
 import os
 import glob
 import shutil
+import re
 
 image_dir = "../input"
 output_dir = "../output"
-dist_treshold = 0.4
+dist_treshold = 0.15
 
 def resize_image(image, size=512):
     w, h = image.shape[:2]
@@ -51,7 +52,14 @@ def histogram_distance(img1, img2):
 
 if __name__ == "__main__":
     print("Assignment 1")
-    images = [image for image in os.listdir(image_dir) if image.endswith(".jpg")]
+    images = sorted(glob.glob(os.path.join(image_dir, ".")))
+    
+        
+    images = sorted(
+        [image for image in os.listdir(image_dir) if image.endswith(".jpg")],
+        key=lambda x: int(re.search(r'\d+', x).group())
+    )
+    
     similar_count = 0
     for i in range(len(images) - 1):
         image = images[i]
