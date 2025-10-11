@@ -9,6 +9,7 @@
 
 import cv2 as cv
 import numpy as np
+from matplotlib import pyplot as plt
 import os
 import glob
 import shutil
@@ -49,7 +50,6 @@ def histogram_distance(img1, img2):
     avg_dist = (dist_r + dist_g + dist_b) / 3
     return avg_dist
 
-
 if __name__ == "__main__":
     print("Assignment 1")
 
@@ -76,15 +76,22 @@ if __name__ == "__main__":
     )
     
     similar_count = 0
+
     for i in range(len(images) - 1):
         image = images[i]
         
         img = cv.imread(f"{image_dir}/{image}")
         img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
         img = resize_image(img)
-        
+
         #find similar images
         similar = []
+        similar_histogram = np.zeros((3, 256), dtype=np.float64)
+        hist_r, hist_g, hist_b = create_histograms(img)
+        similar_histogram[0] += hist_r[:,0]
+        similar_histogram[1] += hist_g[:,0]
+        similar_histogram[2] += hist_b[:,0]
+
         for j in range(i + 1, len(images)):
             image2 = images[j]
             
@@ -95,6 +102,11 @@ if __name__ == "__main__":
             if dist > dist_treshold:
                 break
             similar.append(j)
+            hist_r, hist_g, hist_b = create_histograms(img2)
+            similar_histogram[0] += hist_r[:,0]
+            similar_histogram[1] += hist_g[:,0]
+            similar_histogram[2] += hist_b[:,0]
+
         
         # create folder with similar images   
         if len(similar) > 1:
@@ -106,4 +118,31 @@ if __name__ == "__main__":
                 similar_image = images[idx]
                 shutil.copy(os.path.join(image_dir, similar_image), os.path.join(folder_path, similar_image))
             similar_count += 1
+
+            # compute average histogram
+            count_sim = len(similar)+1
+            avg_r = similar_histogram[0]/count_sim
+            avg_g = similar_histogram[1]/count_sim
+            avg_b = similar_histogram[2]/count_sim
+
+            bins = np.arange(256)
+
+            plt.figure(figsize=(6,3))
+            plt.bar(bins, avg_r, color='red', alpha=0.4, label='Red')
+            plt.bar(bins, avg_g, color='green', alpha=0.4, label='Green')
+            plt.bar(bins, avg_b, color='blue', alpha=0.4, label='Blue')
+
+            plt.title("RGB Histogram (Bar Chart)")
+            plt.xlabel("Pixel Value")
+            plt.ylabel("Frequency")
+            plt.legend()
+
+            # Save the histogram
+            hist_path = os.path.join(folder_path, "histograms.jpg")
+            plt.savefig(hist_path, bbox_inches="tight", dpi=300)
+            plt.close()
+
+
+            # compute common histogram
+
             
