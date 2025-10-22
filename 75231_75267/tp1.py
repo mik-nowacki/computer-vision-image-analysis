@@ -205,11 +205,7 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"Failed to delete {file_path}. Reason: {e}")
 
-    # images = sorted(glob.glob(os.path.join(image_dir, ".")))
-
-    # Get all image files (jpg, png, jpeg) 
-    image_paths = sorted(glob.glob(os.path.join(image_dir, "*.*")))
-    
+    # images = sorted(glob.glob(os.path.join(image_dir, "*.*")))
         
     images = sorted(
         [image for image in os.listdir(image_dir) if image.endswith(".jpg")],
@@ -273,8 +269,6 @@ if __name__ == "__main__":
             scale = np.array([target_mean / mean_r,
                               target_mean / mean_g,
                               target_mean / mean_b])
-
-            # print(f"[{folder_name}] White balance scale: R={scale[0]:.2f}, G={scale[1]:.2f}, B={scale[2]:.2f}")
 
             # Save and white-balance all grouped images directly
             group_indices = [i] + similar
